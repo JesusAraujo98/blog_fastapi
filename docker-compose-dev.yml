@@ -1,0 +1,26 @@
+version: "3.10"
+services:
+  booksblog:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    links:
+      - monguito
+    volumes:
+      - .:/code
+  monguito:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=araujo
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/data/db
+      # mysql -> /var/lib/mysql
+      # postgres -> /var/lib/postgresql/data
+volumes:
+  mongo-data:
+  
